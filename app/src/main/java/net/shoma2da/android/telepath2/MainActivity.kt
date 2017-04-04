@@ -4,9 +4,14 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.widget.ArrayAdapter
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.HashMap
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,11 +34,49 @@ class MainActivity : AppCompatActivity() {
         val name = pref.getString("name", "")
         val phoneNumber = pref.getString("phone_number", "")
 
+        //サインアップ？
         if (name.isEmpty() || phoneNumber.isEmpty()) {
             startActivity(Intent(this, SignInActivity::class.java))
         }
 
+        //プッシュ用Token準備
         updateToken(phoneNumber)
+
+        //リスト管理
+        val adapter = ArrayAdapter<User>(this, android.R.layout.simple_list_item_1)
+        list_view.adapter = adapter
+        database.getReference("/users/$phoneNumber")
+                .child("friends").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError?) {
+            }
+
+            override fun onDataChange(data: DataSnapshot?) {
+                if (data == null || data.value == null) {
+                    return
+                }
+
+                val friendsMap = data.value as HashMap<String, String>
+                friendsMap.keys.forEach {
+                    database.getReference("users")
+                            .child(it).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError?) {
+                        }
+
+                        override fun onDataChange(data: DataSnapshot?) {
+                            if (data == null || data.value == null) {
+                                return
+                            } else {
+                                val user = data.getValue(User::class.java)
+                                adapter.add(user)
+                            }
+                        }
+                    })
+                }
+            }
+        })
+
+        //リストクリック時の挙動
+        //TODO
     }
 
     private fun updateToken(phoneNumber: String) {
@@ -45,4 +88,9 @@ class MainActivity : AppCompatActivity() {
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         pref.edit().putString("token", token).apply()
     }
+}
+
+class User(var name: String? = null,
+           var token: String? = null) {
+    override fun toString() = name ?: "NO_NAME"
 }
