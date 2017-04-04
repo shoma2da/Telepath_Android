@@ -113,6 +113,9 @@ class ListenActivity : Activity() {
         mediaPlayer.setDataSource(url)
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
         mediaPlayer.prepare()
+        mediaPlayer.setOnCompletionListener {
+            onFarFace()
+        }
         mediaPlayer.start()
     }
 
@@ -124,6 +127,7 @@ class ListenActivity : Activity() {
 
             //再生終了
             mediaPlayer.stop()
+            Toast.makeText(this, "再生が終了しました", Toast.LENGTH_SHORT).show()
 
             //バイブで知らせる
             val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
