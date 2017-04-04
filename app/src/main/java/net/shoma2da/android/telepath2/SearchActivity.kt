@@ -1,7 +1,6 @@
 package net.shoma2da.android.telepath2
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -11,9 +10,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_search.*
-import java.util.HashMap
+import java.util.*
 
 class SearchActivity : AppCompatActivity() {
 

@@ -1,18 +1,17 @@
 package net.shoma2da.android.telepath2
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.HashMap
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -85,6 +84,8 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+
+        //TODO リスト長押しでショートカット作成、履歴確認、友だちから削除（ダミーで良い）
     }
 
     private fun updateToken(phoneNumber: String) {
