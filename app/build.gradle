@@ -42,6 +42,12 @@ dependencies {
     // Progress
     compile 'com.github.d-max:spots-dialog:0.7@aar'
 
+    // joda-time
+    compile 'joda-time:joda-time:2.9.7'
+
+    // http
+    compile 'com.loopj.android:android-async-http:1.4.9'
+
     testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
