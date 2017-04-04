@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -86,6 +87,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         //TODO リスト長押しでショートカット作成、履歴確認、友だちから削除（ダミーで良い）
+        list_view.setOnItemLongClickListener { parent, view, position, id ->
+            Toast.makeText(this@MainActivity, "ショートカット・履歴確認など、メニューを出す？？", Toast.LENGTH_SHORT).show()
+            true
+        }
     }
 
     private fun updateToken(phoneNumber: String) {
