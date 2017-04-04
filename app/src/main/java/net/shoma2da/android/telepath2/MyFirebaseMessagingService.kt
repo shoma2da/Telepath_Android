@@ -34,6 +34,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setSmallIcon(android.R.drawable.ic_btn_speak_now)
                 .setAutoCancel(true)
                 .setPriority(Integer.MAX_VALUE)
+                .setWhen(System.currentTimeMillis())
                 .setColor(resources.getColor(R.color.colorAccent))
                 .build()
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -41,6 +42,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibrator.vibrate(longArrayOf(0, 200, 200, 200, 300, 100, 100, 100), -1)
+
+
     }
 
 }
