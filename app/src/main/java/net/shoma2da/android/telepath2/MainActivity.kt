@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                                 return
                             } else {
                                 val user = data.getValue(User::class.java)
+                                user.phoneNumber = it
                                 adapter.add(user)
                             }
                         }
@@ -76,7 +78,13 @@ class MainActivity : AppCompatActivity() {
         })
 
         //リストクリック時の挙動
-        //TODO
+        list_view.setOnItemClickListener { parent, view, position, id ->
+            val user = adapter.getItem(position)
+            val intent = Intent(this, TalkActivity::class.java).apply {
+                putExtra("phone_number", user.phoneNumber)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun updateToken(phoneNumber: String) {
@@ -91,6 +99,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 class User(var name: String? = null,
-           var token: String? = null) {
+           var token: String? = null,
+           var phoneNumber: String? = null) {
     override fun toString() = name ?: "NO_NAME"
 }
