@@ -1,8 +1,11 @@
 package net.shoma2da.android.telepath2
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -22,6 +25,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // 権限
+        //if (!checkOverlayPermission()) { requestOverlayPermission() }
+        val needPermissionList =
+                arrayOf(android.Manifest.permission.RECORD_AUDIO)
+                        .filter { ContextCompat.checkSelfPermission(this, it) !== PackageManager.PERMISSION_GRANTED }
+                        .toTypedArray()
+        if (!needPermissionList.isEmpty()) {
+            ActivityCompat.requestPermissions(this, needPermissionList, 0)
+        }
 
         fab.setOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
