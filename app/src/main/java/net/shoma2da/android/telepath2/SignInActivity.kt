@@ -1,6 +1,7 @@
 package net.shoma2da.android.telepath2
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.google.firebase.database.FirebaseDatabase
@@ -38,6 +39,10 @@ class SignInActivity : AppCompatActivity() {
                     .child(phoneNumber)
                     .setValue(mapOf("name" to name))
                     .addOnSuccessListener {
+                        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+                        pref.edit().putString("name", name).apply()
+                        pref.edit().putString("phone_number", phoneNumber).apply()
+
                         dialog.dismiss()
                         finish()
                     }
