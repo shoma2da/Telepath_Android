@@ -2,6 +2,7 @@ package net.shoma2da.android.telepath2
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -64,6 +65,17 @@ class ListenActivity : Activity() {
             Toast.makeText(this, "未実装です...", Toast.LENGTH_SHORT).show()
         }
 
+        reply_button.setOnClickListener {
+            val intent = Intent(this, TalkActivity::class.java).apply {
+                putExtra("phone_number", phoneNumber)
+            }
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         setupProximitySensor()
     }
 
@@ -122,11 +134,6 @@ class ListenActivity : Activity() {
     override fun onPause() {
         super.onPause()
         wakeLock.release()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
         sensorManager.unregisterListener(sensorEventListener)
     }
-
 }
