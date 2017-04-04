@@ -24,6 +24,7 @@
         <activity android:name=".SignInActivity"/>
         <activity android:name=".SearchActivity"/>
         <activity
+            android:exported="true"
             android:screenOrientation="portrait"
             android:name=".TalkActivity"/>
         <activity android:name=".ListenActivity"/>

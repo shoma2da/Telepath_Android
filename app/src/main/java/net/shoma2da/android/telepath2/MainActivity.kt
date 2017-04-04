@@ -101,7 +101,18 @@ class MainActivity : AppCompatActivity() {
 
         //TODO リスト長押しでショートカット作成、履歴確認、友だちから削除（ダミーで良い）
         list_view.setOnItemLongClickListener { parent, view, position, id ->
-            Toast.makeText(this@MainActivity, "ショートカット・履歴確認など、メニューを出す？？", Toast.LENGTH_SHORT).show()
+            val user = adapter.getItem(position)
+            val shortcutIntent = Intent(this, TalkActivity::class.java).apply {
+                putExtra("phone_number", user.phoneNumber)
+            }
+            val intent = Intent()
+            intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent)
+            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, user.name)
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.mipmap.ic_launcher))
+            intent.action = "com.android.launcher.action.INSTALL_SHORTCUT"
+            sendBroadcast(intent)
+
+            Toast.makeText(this, "ホーム画面にショートカットを設置します（ショートカットだけじゃなく会話履歴とか、友だち管理メニューもここで選べるとか？）", Toast.LENGTH_LONG).show()
             true
         }
     }
