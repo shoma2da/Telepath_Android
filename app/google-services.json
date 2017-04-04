@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1059964231164",
+    "firebase_url": "https://telepath2-96608.firebaseio.com",
+    "project_id": "telepath2-96608",
+    "storage_bucket": "telepath2-96608.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059964231164:android:c5a760482e7de1af",
+        "android_client_info": {
+          "package_name": "net.shoma2da.android.telepath2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059964231164-g4nulisejo8ee3f5rt7jef0j79861f33.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.shoma2da.android.telepath2",
+            "certificate_hash": "3acd1e34643f7f4236fdbbbebc3e173703a8ce93"
+          }
+        },
+        {
+          "client_id": "1059964231164-qnoglknh5ql618kl92bmiluend8b7dcd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8crD38CZG9uLnFHRxxmj3ITT7s1ypVbY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059964231164-qnoglknh5ql618kl92bmiluend8b7dcd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
